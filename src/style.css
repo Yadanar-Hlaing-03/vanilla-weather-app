@@ -65,23 +65,26 @@ li:first-letter {
 
 #fahrenheit-link {
   text-decoration: none;
+  cursor: default;
 }
 #celsius-link {
   text-decoration: none;
+  cursor: default;
 }
-.weather-forecast {
-  margin-top: 20px;
-  text-align: center;
-  color: #000;
+.col-2{
+display: block;
+margin: auto;
+text-align: center;
+margin-top: 30px;
 }
-.weather-forecast-date,
-.weather-forecast-temperature-min {
-  font-size: 16px;
+.forecastIconElement{
+  padding: 0;
+}
+.forecastDayElement{
+  padding: 0;
+  margin-bottom: 0;
   opacity: 0.5;
 }
-.weather-forecast-temperature-min{
-  opacity: 0.5;
-}
-.weather-forecast-temperature {
-  font-size: 13px;
+.forecastTempElement{
+opacity: 0.5;
 }
