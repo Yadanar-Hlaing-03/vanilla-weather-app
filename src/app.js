@@ -25,7 +25,27 @@ function currentTemperature(timezoneOffset) {
   };
   let timeString = date.toLocaleTimeString([], options);
   dateElement.innerHTML = `${day} ${timeString}`;
+let option = {
+  hour: "numeric",
+  hour12: false,
+  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+};
+let hourString=date.toLocaleString([],option);
+console.log(hourString);
+   let backgroundImage = document.getElementById("background-image");
+
+   if (hourString >= 6 && hourString < 12) {
+     // morning
+     backgroundImage.src = "backgrounds/morning.svg";
+   } else if (hourString >= 12 && hourString < 18) {
+     // afternoon/evening
+     backgroundImage.src = "backgrounds/evening.svg";
+   } else {
+     // night
+     backgroundImage.src = "backgrounds/night.svg";
+   }
 }
+
 
 function displayForecast(forecast) {
   // Get the forecast data for the specific hours
@@ -92,7 +112,6 @@ function displayTemperature(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
-  let dateElement = document.querySelector("#date");
   let exactDateElement = document.querySelector("#exactDate");
 
   celsiusTemperature = response.data.main.temp;
