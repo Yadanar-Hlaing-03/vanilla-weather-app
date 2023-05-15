@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-  color: #878787;
+  color: #002045;
   font-size: 24px;
   font-weight: bold;
   line-height: 28px;
@@ -17,7 +17,7 @@ li {
   list-style: none;
   margin: 0;
   padding: 0 0 5px 0;
-  color: rgb(135, 135, 135);
+  color: darkcyan;
   font-size: 16px;
   font-weight: 100;
   line-height: 19px;
@@ -79,7 +79,8 @@ li:first-letter {
   opacity: 0.5;
 }
 .forecastTempElement {
-  opacity: 0.5;
+    color: darkcyan;
+
 }
 
 .units {
@@ -110,6 +111,8 @@ li:first-letter {
 }
 .forecastDayElement {
   font-weight: bold;
+    color: darkcyan;
+
 }
 #fahrenheit-link {
   text-decoration: none;
@@ -145,12 +148,10 @@ li:first-letter {
   text-align: center;
 }
 #windFull {
-  opacity: 0.5;
   font-size: 15px;
 }
 #humidityFull {
   text-align: center;
-  opacity: 0.5;
   font-size: 15px;
 }
 #background-image {
