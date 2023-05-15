@@ -18,6 +18,9 @@
   </head>
   <body>
     <div class="container">
+<img id="weather-background" src="path/to/backgrounds.svg" alt="Weather background image">
+
+
       <div class="weather-app-wrapper">
         <div class="weather-app">
           <form id="search-form" class="mb-3">
@@ -26,7 +29,8 @@
                 <input
                   type="search "
                   placeholder="Type a city..."
-                  class="form-control"
+                  class="form-control shadow-xl border-1"
+                  autofocus="on"
                   id="cityInput"
                   autocomplete="off"
                 />
@@ -44,108 +48,129 @@
             <h1 id="city"></h1>
             <ul>
               <li>Last updated at <span id="date"></span></li>
-              <li id="description"></li>
+              <li><span id="exactDate"></span></li>
             </ul>
           </div>
           <div class="row">
-            <div class="col-6">
-              <div class="d-flex weather-temperature">
-                <img src="" alt="cloudy" id="icon" class="float-left" />
-                <div class="float-left">
-                  <strong id="temperature"></strong
-                  ><span class="units"
-                    ><a href="#" id="celsius-link" class="active">°C</a> |<a
-                      href="#"
-                      id="fahrenheit-link"
-                    >
-                      °F</a
-                    ></span
-                  >
-                </div>
-              </div>
+            <div class="col-4"></div>
+
+            <div class="col-4">
+              <strong id="temperature"></strong
+              ><span class="units"
+                ><a href="#" id="celsius-link" class="active">°C</a> |<a
+                  href="#"
+                  id="fahrenheit-link"
+                >
+                  °F</a
+                ></span
+              >
             </div>
-            <div class="col-6">
-              <ul>
-                <li>Humidity: <span id="humidity">%</span></li>
-                <li>Wind: <span id="wind"> </span> km/h</li>
-              </ul>
+            <div class="col-4" id="weather-icon">
+              <li id="description"></li>
+              <img id="icon" src="" alt="cloudy" />
             </div>
           </div>
           <div class="row">
-            <div class="col-2">
-              <span class="forecastDayElement" id="forecast-day1"></span>
-              <br />
-
-              <br />
-              <img
-                src=""
-                alt="cloud"
-                width="50"
-                id="forecast-icon1"
-                class="forecastIconElement"
-              />
-              <br />
-              <span class="forecastTempElement" id="forecast-temp1"></span>
+            <div class="col-3"></div>
+            <div class="col-3">
+              <span class="humidityPlacement"
+                ><img src="icons/humidity.svg" id="humidity-icon" /><br /><span
+                  id="humidityFull"
+                >
+                  <span id="humidity"></span>%</span
+                ></span
+              >
             </div>
-            <div class="col-2">
-              <span class="forecastDayElement" id="forecast-day2"></span>
-              <br />
-
-              <br />
-              <img
-                src=""
-                alt="cloud"
-                width="50"
-                id="forecast-icon2"
-                class="forecastIconElement"
-              />
-              <br />
-              <span class="forecastTempElement" id="forecast-temp2"></span>
+            <div class="col-3">
+              <span class="windPlacement">
+                <img src="icons/wind.svg" id="wind-icon" /><br /><span
+                  id="windFull"
+                  ><span id="wind"> </span> km/h</span
+                ></span
+              >
             </div>
-            <div class="col-2">
-              <span class="forecastDayElement" id="forecast-day3"></span>
-              <br />
+            <div class="col-3"></div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <span class="forecastDayElement" id="forecast-day1"></span>
+                  <br />
 
-              <br />
-              <img
-                src=""
-                alt="cloud"
-                width="50"
-                id="forecast-icon3"
-                class="forecastIconElement"
-              />
-              <br />
-              <span class="forecastTempElement" id="forecast-temp3"></span>
-            </div>
-            <div class="col-2">
-              <span class="forecastDayElement" id="forecast-day4"></span>
-              <br />
+                  <br />
+                  <img
+                    src=""
+                    alt="cloud"
+                    width="50"
+                    id="forecast-icon1"
+                    class="forecastIconElement"
+                  />
+                  <br />
 
-              <br />
-              <img
-                src=""
-                alt="cloud"
-                width="50"
-                id="forecast-icon4"
-                class="forecastIconElement"
-              />
-              <br />
-              <span class="forecastTempElement" id="forecast-temp4"></span>
-            </div>
-            <div class="col-2">
-              <span class="forecastDayElement" id="forecast-day5"></span>
-              <br />
+                  <span class="forecastTempElement" id="forecast-temp1"></span>
+                </div>
+                <div class="col-2">
+                  <span class="forecastDayElement" id="forecast-day2"></span>
+                  <br />
 
-              <br />
-              <img
-                src=""
-                alt="cloud"
-                width="50"
-                id="forecast-icon5"
-                class="forecastIconElement"
-              />
-              <br />
-              <span class="forecastTempElement" id="forecast-temp5"></span>
+                  <br />
+                  <img
+                    src=""
+                    alt="cloud"
+                    width="50"
+                    id="forecast-icon2"
+                    class="forecastIconElement"
+                  />
+                  <br />
+                  <span class="forecastTempElement" id="forecast-temp2"></span>
+                </div>
+                <div class="col-2">
+                  <span class="forecastDayElement" id="forecast-day3"></span>
+                  <br />
+
+                  <br />
+                  <img
+                    src=""
+                    alt="cloud"
+                    width="50"
+                    id="forecast-icon3"
+                    class="forecastIconElement"
+                  />
+                  <br />
+                  <span class="forecastTempElement" id="forecast-temp3"></span>
+                </div>
+                <div class="col-2">
+                  <span class="forecastDayElement" id="forecast-day4"></span>
+                  <br />
+
+                  <br />
+                  <img
+                    src=""
+                    alt="cloud"
+                    width="50"
+                    id="forecast-icon4"
+                    class="forecastIconElement"
+                  />
+                  <br />
+                  <span class="forecastTempElement" id="forecast-temp4"></span>
+                </div>
+                <div class="col-2">
+                  <span class="forecastDayElement" id="forecast-day5"></span>
+                  <br />
+
+                  <br />
+                  <img
+                    src=""
+                    alt="cloud"
+                    width="50"
+                    id="forecast-icon5"
+                    class="forecastIconElement"
+                  />
+                  <br />
+                  <span class="forecastTempElement" id="forecast-temp5"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -155,7 +180,7 @@
             target="_blank"
             >Open-source code</a
           >
-          , by Olivia
+          by Olivia
         </small>
       </div>
     </div>

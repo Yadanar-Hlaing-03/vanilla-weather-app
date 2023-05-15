@@ -1,25 +1,30 @@
-function formatDate(timestamp) {
-  //calculate the date
-  let date = new Date(timestamp);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+function currentTemperature(timezoneOffset) {
+  let now = new Date();
+  let localTime = now.getTime();
+  let localOffset = now.getTimezoneOffset() * 60000;
+  let utcTime = localTime + localOffset;
+  let offset = timezoneOffset * 1000;
+  let localTimezone = utcTime + offset;
+  let date = new Date(localTimezone);
   let days = [
     "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
-    "Firday",
+    "Friday",
     "Saturday",
   ];
-  let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes}`;
+  let day = days[date.getUTCDay()];
+  let dateElement = document.querySelector("#date");
+  let options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  };
+  let timeString = date.toLocaleTimeString([], options);
+  dateElement.innerHTML = `${day} ${timeString}`;
 }
 
 function displayForecast(forecast) {
@@ -37,7 +42,8 @@ function displayForecast(forecast) {
   for (let i = 0; i < forecastData.length; i++) {
     let forecastDayElement = document.getElementById(`forecast-day${i + 1}`);
     let forecastTempElement = document.getElementById(`forecast-temp${i + 1}`);
-    let iconElements = document.querySelectorAll(".forecastIconElement");
+
+    let iconElements = document.getElementById(`forecast-icon${i + 1}`);
 
     // Get the forecast date, temperature, and weather condition
     let forecastDate = new Date(forecastData[i].dt_txt);
@@ -46,18 +52,32 @@ function displayForecast(forecast) {
       weekday: "short",
     });
     let forecastTemp = Math.round(forecastData[i].main.temp);
+    let forecastCondition = forecastData[i].weather[0].main;
 
     // Update the HTML on the page with the forecast data
     forecastDayElement.innerHTML = forecastDay;
     forecastTempElement.innerHTML = `${forecastTemp}&deg;C`;
-    iconElements[i].setAttribute(
-      "src",
-      `https://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png`
-    );
-    iconElements[i].setAttribute("alt", forecastData[i].weather[0].description);
+    iconElements.src = getIconUrl(forecastCondition);
   }
 }
 
+function getIconUrl(condition) {
+  switch (condition) {
+    case "Clear":
+      return "images/clear.svg";
+    case "Clouds":
+      return "images/clouds.svg";
+    case "Rain":
+    case "Drizzle":
+      return "images/rain.svg";
+    case "Thunderstorm":
+      return "images/thunderstorm.svg";
+    case "Snow":
+      return "images/snow.svg";
+    default:
+      return "images/unknown.svg";
+  }
+}
 
 function getForecast(coordinates) {
   let apiKey = "c73c9f8f4bf23f384bf6fce4a36e9a14";
@@ -66,13 +86,14 @@ function getForecast(coordinates) {
 }
 
 function displayTemperature(response) {
+  console.log(response);
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
-  let iconElement = document.querySelector("#icon");
+  let exactDateElement = document.querySelector("#exactDate");
 
   celsiusTemperature = response.data.main.temp;
 
@@ -82,12 +103,53 @@ function displayTemperature(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
-  iconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  let now = new Date();
+  let date = now.getDate();
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[now.getMonth()];
+  exactDateElement.innerHTML = `${date} ${month}`;
+  let condition = response.data.weather[0].main;
+
+  let icon = document.getElementById("icon");
+
+  // Set the icon source based on the weather condition
+  switch (condition) {
+    case "Clear":
+      icon.src = "images/clear.svg";
+      break;
+    case "Clouds":
+      icon.src = "images/clouds.svg";
+      break;
+    case "Rain":
+    case "Drizzle":
+      icon.src = "images/rain.svg";
+      break;
+    case "Thunderstorm":
+      icon.src = "images/thunderstorm.svg";
+      break;
+    case "Snow":
+      icon.src = "images/snow.svg";
+      break;
+    default:
+      icon.src = "images/unknown.svg";
+      break;
+  }
+
+  // Call this function with the weather condition as an argument to set the appropriate background image.
 
   getForecast(response.data.coord);
 }
@@ -95,8 +157,13 @@ function displayTemperature(response) {
 function search(city) {
   let apiKey = "c73c9f8f4bf23f384bf6fce4a36e9a14";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayTemperature);
+  axios.get(apiUrl).then(function (response) {
+    let timezoneOffset = response.data.timezone;
+    displayTemperature(response);
+    currentTemperature(timezoneOffset); // Pass the timezone offset to the function
+  });
 }
+
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#cityInput");

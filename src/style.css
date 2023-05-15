@@ -1,11 +1,11 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1 {
   color: #878787;
   font-size: 24px;
-  font-weight: 100;
+  font-weight: bold;
   line-height: 28px;
   margin-bottom: 0;
 }
@@ -16,7 +16,7 @@ ul {
 li {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding:0 0 5px 0;
   color: rgb(135, 135, 135);
   font-size: 16px;
   font-weight: 100;
@@ -63,6 +63,54 @@ li:first-letter {
   text-decoration: none;
 }
 
+.col-2 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  margin-top: 30px;
+}
+.forecastIconElement {
+  padding: 0;
+}
+.forecastDayElement {
+  padding: 0;
+  margin-bottom: 0;
+  opacity: 0.5;
+}
+.forecastTempElement {
+  opacity: 0.5;
+}
+
+.units {
+  vertical-align: top;
+  font-weight: bold;
+  line-height: 2;
+  font-size: 20px;
+}
+.humidityPlacement {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.windPlacement {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.col-3 {
+  text-align: center;
+}
+.card-body {
+  padding: 0 10px 20px 0;
+  background: #f7e2e8;
+  font-size: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.card {
+  margin-top: 20px;
+}
+.forecastDayElement {
+  font-weight: bold;
+}
 #fahrenheit-link {
   text-decoration: none;
   cursor: default;
@@ -71,20 +119,39 @@ li:first-letter {
   text-decoration: none;
   cursor: default;
 }
-.col-2{
-display: block;
-margin: auto;
-text-align: center;
-margin-top: 30px;
+#temperature {
+  color: #002045;
+  font-size: 90px;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.forecastIconElement{
+#weather-icon {
+  text-align: center;
   padding: 0;
 }
-.forecastDayElement{
-  padding: 0;
-  margin-bottom: 0;
+#icon {
+  margin-top: 10px;
+  width: 80px;
+  height: 80px;
+}
+#humidity-icon {
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+}
+#wind-icon {
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+#windFull{
   opacity: 0.5;
+  font-size: 15px;
 }
-.forecastTempElement{
-opacity: 0.5;
+#humidityFull {
+  text-align: center;
+  opacity: 0.5;
+    font-size: 15px;
+
 }
+
